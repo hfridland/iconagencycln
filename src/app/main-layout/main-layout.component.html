@@ -1,0 +1,43 @@
+<mat-toolbar color="primary" class="toolbar">
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="routerLink" routerLink="/">
+    Quotes part system
+  </span>
+  <span class="spacer w100 flex">
+    <mat-button-toggle-group name="form" #formgroup>
+      <mat-button-toggle value="parts" checked="true" routerLink="/parts">Parts</mat-button-toggle>
+      <mat-button-toggle value="products" routerLink="/products">Products</mat-button-toggle>
+      <mat-button-toggle value="quotes" routerLink="/quotes">Quotes</mat-button-toggle>
+    </mat-button-toggle-group>
+  </span>
+  <button mat-icon-button matTooltip="Login" *ngIf="!auth.isAuthenticated()">
+    <mat-icon routerLink="/login">login</mat-icon>
+  </button>
+  <button mat-icon-button matTooltip="Logout" *ngIf="auth.isAuthenticated()" routerLink="/login"
+    (click)="auth.logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngIf="!auth.isAuthenticated()" routerLink="/login">Login</button>
+  <button mat-menu-item *ngIf="auth.isAuthenticated()" (click)="auth.logout()">Logout</button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item routerLink="/login" [queryParams]="{action: 'create'}">Create Account</button>
+  <button mat-menu-item routerLink="/login" [queryParams]="{action: 'changePwd'}" *ngIf="auth.isAuthenticated()">Change
+    Password</button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item routerLink="/about">About Dog Breed Images</button>
+</mat-menu>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<mat-toolbar color="primary" class="toolbar bottom">
+  <span *ngIf="!auth.email">User: Anonymous</span>
+  <span *ngIf="auth.email">User: {{auth.email}}</span>
+</mat-toolbar>
