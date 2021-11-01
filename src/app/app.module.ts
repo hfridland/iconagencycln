@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,14 @@ import { LoginComponent } from './main-layout/login/login.component';
 import { PartsFormComponent } from './main-layout/forms/parts-form/parts-form.component';
 import { ProductsFormComponent } from './main-layout/forms/products-form/products-form.component';
 import { QuotesFormComponent } from './main-layout/forms/quotes-form/quotes-form.component';
+import { AuthInterceptor } from './shared/auth.interceptor';
+import { GetNewPrtNoDialogComponent } from './main-layout/dialogs/get-new-prt-no-dialog/get-new-prt-no-dialog.component';
+
+const INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor,
+};
 
 @NgModule({
   declarations: [
@@ -21,7 +29,8 @@ import { QuotesFormComponent } from './main-layout/forms/quotes-form/quotes-form
     LoginComponent,
     PartsFormComponent,
     ProductsFormComponent,
-    QuotesFormComponent
+    QuotesFormComponent,
+    GetNewPrtNoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +41,7 @@ import { QuotesFormComponent } from './main-layout/forms/quotes-form/quotes-form
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

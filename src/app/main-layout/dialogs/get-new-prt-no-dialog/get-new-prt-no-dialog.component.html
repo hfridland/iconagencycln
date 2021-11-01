@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>New Part No Dialog</h1>
+<div mat-dialog-content>
+  <p>Please enter new part number</p>
+  <mat-form-field appearance="fill">
+    <mat-label>New Part Number</mat-label>
+    <input matInput [(ngModel)]="data.partNo">
+
+  </mat-form-field>
+  <mat-error *ngIf="error">{{error}}</mat-error>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close();">Close</button>
+  <button mat-button (click)="onOk()">Ok</button>
+</div>

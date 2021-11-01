@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { LoginRequest, LoginResponse } from '../interfaces';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   public error$: Subject<string> = new Subject<string>();
-  host = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }
 
@@ -51,7 +51,7 @@ export class AuthService {
   login(loginRequest: LoginRequest): Observable<any> {
     this.email = loginRequest.username;
     return this.http
-      .post(`${this.host}api/auth/signin`, loginRequest)
+      .post(`${environment.srvHost}api/auth/signin`, loginRequest)
       .pipe(
         // @ts-ignore
         tap(this.setToken),

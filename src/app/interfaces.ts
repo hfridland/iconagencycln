@@ -3,8 +3,22 @@ export interface LoginRequest {
   password: string;
 }
 
-
 export interface LoginResponse {
   success: boolean;
   token: string;
+}
+
+export interface PartHeader {
+  partNo: string;
+  description: string;
+}
+
+export interface Bom {
+  part: string;
+  sku: string;
+  description: string;
+  category: string;
+  nonCalculatedPrice: number;
+  listPrice: number;
+  discountPercentage: number;
 }
