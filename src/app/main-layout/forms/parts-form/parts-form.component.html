@@ -1,26 +1,25 @@
+<h2>Parts Form</h2>
+
+<mat-form-field appearance="fill">
+  <mat-label>Search by Caterory</mat-label>
+  <mat-select (selectionChange)="selectionChangeCategory($event)">
+    <mat-option *ngFor="let cat of allCats" [value]="cat">
+      {{cat}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Search by Part Number</mat-label>
+  <input matInput type="text" [(ngModel)]="partForSearch" [disabled]="parts.length === 0">
+  <button matSuffix mat-icon-button (click)="searchClick()" [disabled]="parts.length === 0">
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>
+
+<hr>
+
 <form [formGroup]="form">
-  <h2>Parts Form</h2>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Search by Caterory</mat-label>
-    <mat-select (selectionChange)="selectionChangeCategory($event)">
-      <mat-option *ngFor="let cat of allCats" [value]="cat">
-        {{cat}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Search by Part Number</mat-label>
-    <mat-select (selectionChange)="selectionChangePart($event)">
-      <mat-option *ngFor="let part of parts" value="{{part.partNo}}">
-        {{part.partNo}} - {{part.description}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <hr>
-
   <p>
     <mat-form-field appearance="fill">
       <mat-label>Part No</mat-label>

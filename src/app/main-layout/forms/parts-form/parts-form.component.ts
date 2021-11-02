@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Bom, PartHeader } from 'src/app/interfaces';
 import { DataService } from 'src/app/services/data.service';
 import { GetNewPrtNoDialogComponent } from '../../dialogs/get-new-prt-no-dialog/get-new-prt-no-dialog.component';
+import { PartNoSearchDialogComponent } from '../../dialogs/part-no-search-dialog/part-no-search-dialog.component';
 
 @Component({
   selector: 'app-parts-form',
@@ -14,8 +15,9 @@ import { GetNewPrtNoDialogComponent } from '../../dialogs/get-new-prt-no-dialog/
 })
 export class PartsFormComponent implements OnInit {
 
-  allCats: String[] = ['Cat 1', 'Cat 2'];
+  allCats: String[] = [];
   parts: PartHeader[] = [];
+  partForSearch: string;
 
   public form: FormGroup = new FormGroup({
     part: new FormControl('', [Validators.required]),
@@ -44,15 +46,6 @@ export class PartsFormComponent implements OnInit {
       .subscribe(parts => {
         this.parts = parts
       })
-  }
-
-  selectionChangePart(event: MatSelectChange) {
-    const partNo = event.value;
-    this.dataService.getPartByPartNo(partNo)
-      .subscribe((part: Bom) => {
-        part.discountPercentage *= 100;
-        this.form.setValue(part);
-      });
   }
 
   getPartNoErrorMessage() {
@@ -96,4 +89,23 @@ export class PartsFormComponent implements OnInit {
     })
   }
 
+  searchClick() {
+    const dialogRef = this.dialog.open(PartNoSearchDialogComponent, {
+      width: '600px',
+      data: {
+        parts: this.parts,
+        partNo: this.partForSearch
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+      const partNo = result.partNo;
+      this.dataService.getPartByPartNo(partNo)
+        .subscribe((part: Bom) => {
+          part.discountPercentage *= 100;
+          this.form.setValue(part);
+        });
+    });
+  }
 }

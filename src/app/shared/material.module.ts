@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 const material = [
   MatToolbarModule,
@@ -32,7 +33,8 @@ const material = [
   MatCardModule,
   MatTabsModule,
   MatButtonToggleModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTableModule
 ];
 
 @NgModule({

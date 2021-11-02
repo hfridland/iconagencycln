@@ -15,6 +15,7 @@ import { ProductsFormComponent } from './main-layout/forms/products-form/product
 import { QuotesFormComponent } from './main-layout/forms/quotes-form/quotes-form.component';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { GetNewPrtNoDialogComponent } from './main-layout/dialogs/get-new-prt-no-dialog/get-new-prt-no-dialog.component';
+import { PartNoSearchDialogComponent } from './main-layout/dialogs/part-no-search-dialog/part-no-search-dialog.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -30,7 +31,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
     PartsFormComponent,
     ProductsFormComponent,
     QuotesFormComponent,
-    GetNewPrtNoDialogComponent
+    GetNewPrtNoDialogComponent,
+    PartNoSearchDialogComponent
   ],
   imports: [
     BrowserModule,

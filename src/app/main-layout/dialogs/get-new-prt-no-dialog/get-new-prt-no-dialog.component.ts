@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 
-export interface DialogData {
+export interface PartNoDialogData {
   partNo: string;
 }
 
@@ -16,7 +16,7 @@ export class GetNewPrtNoDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<GetNewPrtNoDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: PartNoDialogData,
     private dataService: DataService
   ) { }
 
