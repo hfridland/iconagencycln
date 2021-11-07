@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from 'src/app/services/data.service';
+import { PartService } from 'src/app/services/part.service';
 
 export interface PartNoDialogData {
   partNo: string;
@@ -17,7 +17,7 @@ export class GetNewPrtNoDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<GetNewPrtNoDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: PartNoDialogData,
-    private dataService: DataService
+    private partService: PartService
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class GetNewPrtNoDialogComponent implements OnInit {
       return;
     }
 
-    this.dataService.isPartNoInUse(this.data.partNo)
+    this.partService.isPartNoInUse(this.data.partNo)
       .subscribe(res => {
         if (res) {
           this.error = 'This Part No is Use';

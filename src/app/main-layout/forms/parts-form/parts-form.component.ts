@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Bom, PartHeader } from 'src/app/interfaces';
-import { DataService } from 'src/app/services/data.service';
+import { PartService } from 'src/app/services/part.service';
 import { GetNewPrtNoDialogComponent } from '../../dialogs/get-new-prt-no-dialog/get-new-prt-no-dialog.component';
 import { PartNoSearchDialogComponent } from '../../dialogs/part-no-search-dialog/part-no-search-dialog.component';
 
@@ -30,19 +30,19 @@ export class PartsFormComponent implements OnInit {
   });
 
   constructor(
-    private dataService: DataService,
+    public partService: PartService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
-    this.dataService.getPartCategories()
+    this.partService.getPartCategories()
       .subscribe(cats => this.allCats = cats);
   }
 
   selectionChangeCategory(event: MatSelectChange) {
     const category = event.value;
-    this.dataService.getPartsByCaterory(category)
+    this.partService.getPartsByCaterory(category)
       .subscribe(parts => {
         this.parts = parts
       })
@@ -76,7 +76,8 @@ export class PartsFormComponent implements OnInit {
       if (!result) return;
       this.form.reset();
       this.form.patchValue({
-        part: result.partNo
+        part: result.partNo,
+        category: this.allCats[0]
       });
     });
   }
@@ -84,7 +85,7 @@ export class PartsFormComponent implements OnInit {
   onSaveClick() {
     const bom: Bom = this.form.value;
     bom.discountPercentage /= 100;
-    this.dataService.saveBom(bom).subscribe(res => {
+    this.partService.saveBom(bom).subscribe(res => {
       this._snackBar.open('Part saved', 'Close', { duration: 5000 });
     })
   }
@@ -101,7 +102,7 @@ export class PartsFormComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (!result) return;
       const partNo = result.partNo;
-      this.dataService.getPartByPartNo(partNo)
+      this.partService.getPartByPartNo(partNo)
         .subscribe((part: Bom) => {
           part.discountPercentage *= 100;
           this.form.setValue(part);

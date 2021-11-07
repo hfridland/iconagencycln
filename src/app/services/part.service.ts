@@ -1,18 +1,19 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, Subject, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Bom, PartHeader } from '../interfaces';
+import { Bom } from '../interfaces';
 
 @Injectable({ providedIn: 'root' })
-export class DataService {
+export class PartService {
+  public error$: Subject<string> = new Subject<string>();
+
   constructor(private http: HttpClient) { }
 
   private handleError(error: HttpErrorResponse) {
-    /*this.setToken(null);
-    const { message } = error.error;
-    this.error$.next(message);*/
+    const { message } = error;
+    this.error$.next(message);
 
     console.log(error);
     return throwError(error);

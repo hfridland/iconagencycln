@@ -1,88 +1,101 @@
-<h2>Parts Form</h2>
+<div class="center-align">
+  <h2>Parts Form</h2>
 
-<mat-form-field appearance="fill">
-  <mat-label>Search by Caterory</mat-label>
-  <mat-select (selectionChange)="selectionChangeCategory($event)">
-    <mat-option *ngFor="let cat of allCats" [value]="cat">
-      {{cat}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+  <p>
+    <mat-error *ngIf="partService.error$ | async as error">{{ error }}</mat-error>
+  </p>
 
-<mat-form-field appearance="fill">
-  <mat-label>Search by Part Number</mat-label>
-  <input matInput type="text" [(ngModel)]="partForSearch" [disabled]="parts.length === 0">
-  <button matSuffix mat-icon-button (click)="searchClick()" [disabled]="parts.length === 0">
-    <mat-icon>search</mat-icon>
-  </button>
-</mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search by Caterory</mat-label>
+    <mat-select (selectionChange)="selectionChangeCategory($event)">
+      <mat-option *ngFor="let cat of allCats" [value]="cat">
+        {{cat}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search by Part Number</mat-label>
+    <input matInput type="text" [(ngModel)]="partForSearch" [disabled]="parts.length === 0">
+    <button matSuffix mat-icon-button (click)="searchClick()" [disabled]="parts.length === 0">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
 
 <hr>
 
 <form [formGroup]="form">
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Part No</mat-label>
-      <input matInput placeholder="Part number" formControlName="part" required readonly>
-      <mat-error *ngIf="form.get('part')!.invalid">{{getPartNoErrorMessage()}}</mat-error>
-    </mat-form-field>
-  </p>
+  <div class="center-align">
+    <div class="form-input">
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Part No</mat-label>
+          <input matInput placeholder="Part number" formControlName="part" required readonly>
+          <mat-error *ngIf="form.get('part')!.invalid">{{getPartNoErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
 
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>SKU</mat-label>
-      <input matInput placeholder="SKU" formControlName="sku">
-      <mat-error *ngIf="form.get('sku')!.invalid">{{getSkuErrorMessage()}}</mat-error>
-    </mat-form-field>
-  </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>SKU</mat-label>
+          <input matInput placeholder="SKU" formControlName="sku">
+          <mat-error *ngIf="form.get('sku')!.invalid">{{getSkuErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
 
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Description</mat-label>
-      <input matInput placeholder="Description" formControlName="description" required>
-      <mat-error *ngIf="form.get('description')!.invalid">{{getDescriptionErrorMessage()}}</mat-error>
-    </mat-form-field>
-  </p>
+      <p>
+        <mat-form-field appearance="fill" style="width: 500px;">
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Description" formControlName="description" required>
+          <mat-error *ngIf="form.get('description')!.invalid">{{getDescriptionErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </p>
 
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Caterory</mat-label>
-      <mat-select formControlName="category">
-        <mat-option *ngFor="let cat of allCats" [value]="cat">
-          {{cat}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Caterory</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let cat of allCats" [value]="cat">
+              {{cat}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
 
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Non Calculated Price</mat-label>
-      <input matInput placeholder="0" class="right-align" type="number" formControlName="nonCalculatedPrice">
-      <span matPrefix>$&nbsp;</span>
-      <!--<span matSuffix>.00</span>-->
-    </mat-form-field>
-  </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Non Calculated Price</mat-label>
+          <input matInput placeholder="0" class="right-align" type="number" formControlName="nonCalculatedPrice">
+          <span matPrefix>$&nbsp;</span>
+          <!--<span matSuffix>.00</span>-->
+        </mat-form-field>
+      </p>
 
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>List Price</mat-label>
-      <input matInput placeholder="0" class="right-align" type="number" formControlName="listPrice">
-      <span matPrefix>$&nbsp;</span>
-    </mat-form-field>
-  </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>List Price</mat-label>
+          <input matInput placeholder="0" class="right-align" type="number" formControlName="listPrice">
+          <span matPrefix>$&nbsp;</span>
+        </mat-form-field>
+      </p>
 
-  <p>
-    <mat-form-field appearance="fill">
-      <mat-label>Discount Percentage</mat-label>
-      <input matInput placeholder="0" class="right-align" type="number" formControlName="discountPercentage">
-      <span matSuffix>%</span>
-    </mat-form-field>
-  </p>
+      <p>
+        <mat-form-field appearance="fill">
+          <mat-label>Discount Percentage</mat-label>
+          <input matInput placeholder="0" class="right-align" type="number" formControlName="discountPercentage">
+          <span matSuffix>%</span>
+        </mat-form-field>
+      </p>
+    </div>
+  </div>
 
   <hr>
 
-  <button mat-button type="button" (click)="onNewPartBtnClick()">New Part</button>
-  <button mat-button type="button" (click)="onSaveClick()">Save</button>
+  <div class="center-align">
+    <button mat-button type="button" (click)="onNewPartBtnClick()">New Part</button>
+    <button mat-button type="button" (click)="onSaveClick()" [disabled]="form.get('part')?.invalid">Save</button>
+  </div>
 
 </form>

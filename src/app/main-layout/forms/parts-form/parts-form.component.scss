@@ -1,5 +1,14 @@
+.center-align {
+  text-align: center;
+}
+
 .right-align {
   text-align: right;
+}
+
+.form-input {
+  display: inline-block;
+  text-align: start;
 }
 
 input.example-right-align::-webkit-outer-spin-button,
