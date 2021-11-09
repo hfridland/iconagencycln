@@ -16,6 +16,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const material = [
   MatToolbarModule,
@@ -34,7 +35,8 @@ const material = [
   MatTabsModule,
   MatButtonToggleModule,
   MatSelectModule,
-  MatTableModule
+  MatTableModule,
+  MatCheckboxModule
 ];
 
 @NgModule({

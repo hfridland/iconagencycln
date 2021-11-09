@@ -22,3 +22,19 @@ export interface Bom {
   listPrice: number;
   discountPercentage: number;
 }
+
+export interface ProductHeader {
+  productNo: string;
+  description: string;
+}
+
+export interface Product {
+  productNo: string;
+  productDescription: string;
+  htmlLink: string;
+  category: string;
+  subtotal: number;
+  notes: string;
+  productListPrice: number;
+  parts: Bom[];
+}

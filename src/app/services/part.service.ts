@@ -15,7 +15,7 @@ export class PartService {
     const { message } = error;
     this.error$.next(message);
 
-    console.log(error);
+    //console.log(error);
     return throwError(error);
   }
 

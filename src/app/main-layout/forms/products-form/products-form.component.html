@@ -1,1 +1,87 @@
-<p>products-form works!</p>
+<div class="center-align">
+  <h2>Products Form</h2>
+
+  <p>
+    <mat-error *ngIf="productService.error$ | async as error">{{ error }}</mat-error>
+  </p>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search by Caterory</mat-label>
+    <mat-select (selectionChange)="selectionChangeCategory($event)">
+      <mat-option *ngFor="let cat of allCats" [value]="cat">
+        {{cat}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search by Product Number</mat-label>
+    <input matInput type="text" [(ngModel)]="productForSearch" [disabled]="products.length === 0">
+    <button matSuffix mat-icon-button (click)="searchClick()" [disabled]="products.length === 0">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <hr>
+
+  <form [formGroup]="form">
+    <div class="center-align">
+      <div class="form-input">
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Product No</mat-label>
+            <input matInput placeholder="Product number" formControlName="product" required readonly>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill" style="width: 500px;">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Description" formControlName="description">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Caterory</mat-label>
+            <mat-select formControlName="category">
+              <mat-option *ngFor="let cat of allCats" [value]="cat">
+                {{cat}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill" style="width: 500px;">
+            <mat-label>HTML Link</mat-label>
+            <input matInput placeholder="HTML Link" formControlName="htmlLink">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-checkbox formControlName="subtotal">Include Subtotal?</mat-checkbox>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill" style="width: 500px;">
+            <mat-label>Notes</mat-label>
+            <textarea matInput placeholder="Notes" formControlName="notes"></textarea>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>List Price</mat-label>
+            <input matInput placeholder="0" class="right-align" type="number" formControlName="productListPrice">
+            <span matPrefix>$&nbsp;</span>
+          </mat-form-field>
+        </p>
+
+
+      </div>
+    </div>
+  </form>
+
+
+</div>
