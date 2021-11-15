@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>New Product Dialog</h1>
+<div mat-dialog-content>
+  <p>Please enter new product number</p>
+  <mat-form-field appearance="fill">
+    <mat-label>New Product Number</mat-label>
+    <input matInput [(ngModel)]="data.productNo">
+  </mat-form-field>
+  <mat-error *ngIf="error">{{error}}</mat-error>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close();">Close</button>
+  <button mat-button (click)="onOk()">Ok</button>
+</div>

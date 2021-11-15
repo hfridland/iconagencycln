@@ -1,3 +1,12 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  align-self: flex-start;
+}
+
 .spacer {
   flex: 1 1 auto;
   text-align: center;
@@ -9,6 +18,11 @@
 }
 
 .bottom {
-  position: fixed;
-  bottom: 0;
+  align-self: flex-end;
+  //position: fixed;
+  //bottom: 0;
+}
+
+.container {
+  flex-grow: 1000;
 }

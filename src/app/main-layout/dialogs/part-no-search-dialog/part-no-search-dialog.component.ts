@@ -19,6 +19,7 @@ export class PartNoSearchDialogComponent implements OnInit {
   filterVal: string;
   selPart: PartHeader = {
     partNo: '',
+    sku: '',
     description: ''
   };
 

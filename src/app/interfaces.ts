@@ -10,6 +10,7 @@ export interface LoginResponse {
 
 export interface PartHeader {
   partNo: string;
+  sku: string;
   description: string;
 }
 
@@ -37,4 +38,15 @@ export interface Product {
   notes: string;
   productListPrice: number;
   parts: Bom[];
+}
+
+export interface ProductForSave {
+  productNo: string;
+  productDescription: string;
+  htmlLink: string;
+  category: string;
+  subtotal: number;
+  notes: string;
+  productListPrice: number;
+  parts: string[];
 }

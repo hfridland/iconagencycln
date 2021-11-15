@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PartService } from 'src/app/services/part.service';
 
 export interface PartNoDialogData {
+  isNonUsed: boolean;
   partNo: string;
 }
 
@@ -29,14 +30,25 @@ export class GetNewPrtNoDialogComponent implements OnInit {
       return;
     }
 
-    this.partService.isPartNoInUse(this.data.partNo)
-      .subscribe(res => {
-        if (res) {
-          this.error = 'This Part No is Use';
-        } else {
-          this.dialogRef.close(this.data);
-        }
-      });
+    if (this.data.isNonUsed) {
+      this.partService.isPartNoInUse(this.data.partNo)
+        .subscribe(res => {
+          if (res) {
+            this.error = 'This Part Exists';
+          } else {
+            this.dialogRef.close(this.data);
+          }
+        });
+    } else {
+      this.partService.isPartNoInUse(this.data.partNo)
+        .subscribe(res => {
+          if (!res) {
+            this.error = 'Unknown Part';
+          } else {
+            this.dialogRef.close(this.data);
+          }
+        });
+    }
 
   }
 

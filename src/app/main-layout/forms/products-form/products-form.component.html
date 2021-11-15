@@ -16,8 +16,8 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Search by Product Number</mat-label>
-    <input matInput type="text" [(ngModel)]="productForSearch" [disabled]="products.length === 0">
-    <button matSuffix mat-icon-button (click)="searchClick()" [disabled]="products.length === 0">
+    <input matInput type="text" [(ngModel)]="productForSearch" [disabled]="products.length===0">
+    <button matSuffix mat-icon-button (click)="searchClick()" [disabled]="products.length===0">
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
@@ -78,9 +78,51 @@
           </mat-form-field>
         </p>
 
+        <p>Assign part numbers to the above product:</p>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+          <!-- Part# Column -->
+          <ng-container matColumnDef="partno">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by part#">Part#</th>
+            <td mat-cell *matCellDef="let element">{{element.part}}</td>
+          </ng-container>
+          <!-- SKU Column -->
+          <ng-container matColumnDef="sku">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>SKU</th>
+            <td mat-cell *matCellDef="let element">{{element.sku}}</td>
+          </ng-container>
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+            <td mat-cell *matCellDef="let element">{{element.description}}</td>
+          </ng-container>
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-raised-button type="button" (click)="removePart(element.part)">-</button>
+            </td>
+          </ng-container>
 
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No Parts</td>
+          </tr>
+        </table>
+        <button mat-raised-button type="button" (click)="addPart()" [disabled]="products.length===0">Add Part</button>
+        <hr>
       </div>
     </div>
+    <hr>
+
+    <div class="center-align">
+      <button mat-raised-button type="button" (click)="onNewProductBtnClick()" [disabled]="products.length===0">New
+        Product</button>
+      <button mat-raised-button type="button" (click)="onSaveClick()"
+        [disabled]="form.get('product')?.invalid">Save</button>
+    </div>
+
   </form>
 
 

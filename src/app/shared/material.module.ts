@@ -16,7 +16,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSort } from '@angular/material/sort';
 
 const material = [
   MatToolbarModule,
@@ -36,7 +38,8 @@ const material = [
   MatButtonToggleModule,
   MatSelectModule,
   MatTableModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatSortModule
 ];
 
 @NgModule({

@@ -15,7 +15,6 @@ export class PartService {
     const { message } = error;
     this.error$.next(message);
 
-    //console.log(error);
     return throwError(error);
   }
 
@@ -33,7 +32,7 @@ export class PartService {
       .pipe(
         map(res => {
           //console.log(res);
-          return res.map((part: any) => ({ partNo: part.part, description: part.description }))
+          return res.map((part: any) => ({ partNo: part.part, sku: part.sku, description: part.description }))
         }),
         catchError(this.handleError.bind(this))
       );

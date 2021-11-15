@@ -70,7 +70,10 @@ export class PartsFormComponent implements OnInit {
     this.form.reset();
     const dialogRef = this.dialog.open(GetNewPrtNoDialogComponent, {
       width: '250px',
-      data: { partNo: '' }
+      data: {
+        isNonUsed: true,
+        partNo: ''
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (!result) return;

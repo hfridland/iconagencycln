@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Bom, Product } from '../interfaces';
+import { Bom, Product, ProductForSave } from '../interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
@@ -60,6 +60,21 @@ export class ProductService {
       )
   }
 
+  isProductInUse(product: string): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${environment.srvHost}api/product/${product}/inUse`)
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  saveProduct(product: ProductForSave): Observable<ProductForSave> {
+    return this.http
+      .post<ProductForSave>(`${environment.srvHost}api/product/update`, product)
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
 
 
 }
