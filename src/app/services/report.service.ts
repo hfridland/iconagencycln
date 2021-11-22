@@ -27,7 +27,8 @@ export class ReportService {
       )
       .subscribe(token => {
         // console.log('token', token);
-        window.open(`${environment.srvHost}api/report/QuoteWithoutSDPrice/${token}`, '_blank');
+        //window.open(`${environment.srvHost}api/report/QuoteWithoutSDPrice/${token}`, '_blank');
+        window.open(`/api/report/QuoteWithoutSDPrice/${token}`, '_blank');
       });
   }
 
